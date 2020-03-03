@@ -19,7 +19,7 @@ namespace BingSearchSkill.Responses {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CommonStrings {
@@ -57,6 +57,24 @@ namespace BingSearchSkill.Responses {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.bing.com.
+        /// </summary>
+        public static string BingSite {
+            get {
+                return ResourceManager.GetString("BingSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry I do not know this answer yet..
+        /// </summary>
+        public static string DontKnowAnswer {
+            get {
+                return ResourceManager.GetString("DontKnowAnswer", resourceCulture);
             }
         }
         
