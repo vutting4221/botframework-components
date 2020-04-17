@@ -230,9 +230,15 @@ namespace ITSMSkill.Dialogs
                 if (luisService != null)
                 {
                     var result = stepContext.Context.TurnState.Get<ITSMLuis>(StateProperties.ITSMLuisResult);
-                    var intent = result?.TopIntent().intent;
+                    var (intent, score) = result.TopIntent();
 
-                    if (intent != null && intent != ITSMLuis.Intent.None)
+                    // TODO filter bad ones
+                    if (score < 0.4)
+                    {
+                        intent = ITSMLuis.Intent.None;
+                    }
+
+                    if (intent != ITSMLuis.Intent.None)
                     {
                         state.DigestLuisResult(result, (ITSMLuis.Intent)intent);
                     }
@@ -267,9 +273,16 @@ namespace ITSMSkill.Dialogs
                         case ITSMLuis.Intent.None:
                         default:
                             {
-                                // intent was identified but not yet implemented
-                                await stepContext.Context.SendActivityAsync(_templateManager.GenerateActivity(MainResponses.FeatureNotAvailable), cancellationToken);
-                                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                                // TODO always use show knowledge here
+                                state.ClearLuisResult();
+                                state.TicketTitle = activity.Text;
+
+                                var option = new ShowKnowledgeOption
+                                {
+                                    ConfirmSearch = false,
+                                };
+
+                                return await stepContext.BeginDialogAsync(nameof(ShowKnowledgeDialog), option, cancellationToken: cancellationToken);
                             }
                     }
                 }
