@@ -1,0 +1,46 @@
+[import](common.lg)
+[import](ShowToDo.lg)
+
+
+
+# bfdprompt-098282()
+- ${ListTypePromptForDelete()}
+
+# bfdactivity-689712()
+- ${NoTasksInList()}
+
+
+# ListTypePromptForDelete.Text
+- Do you want to delete something from your To Do, Shopping, or Grocery list?
+
+# ListTypePromptForDelete
+[Activity
+    Text = ${ListTypePromptForDelete.Text()}
+    Speak = ${ListTypePromptForDelete.Text()}
+    InputHint = expectingInput
+]
+
+# AskTaskIndexRetryForDelete.Text
+- Sorry, I couldn't find the item. Let's try again, what do you want to delete?
+
+# AskTaskIndexRetryForDelete
+[Activity
+    Text = ${AskTaskIndexRetryForDelete.Text()}
+    Speak = ${AskTaskIndexRetryForDelete.Text()}
+    InputHint = expectingInput
+]
+
+
+# bfdactivity-jHahka()
+- ${ShowToDo(dialog.count,conversation.listType,dialog.todos)}
+
+# bfdprompt-5KzfvN()
+[Activity
+    Text = Ok, give me the exact title of the todo you would like to delete..
+    SuggestedActions = Help | Cancel
+]
+
+# bfdactivity-As8-Wf()
+- OK, I've updated the task content to ${@taskContent}
+# bfdactivity-YSmvaQ()
+- OK, I've updated the list type to ${dialog.listType}

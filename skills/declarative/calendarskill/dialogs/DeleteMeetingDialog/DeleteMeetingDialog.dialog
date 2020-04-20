@@ -1,0 +1,115 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "0T0Ron",
+    "name": "DeleteMeetingDialog"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "id": "R_DhL6"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "qh5Xqw",
+            "name": "search a meeting"
+          },
+          "dialog": "SearchMeetings",
+          "resultProperty": "dialog.meeting"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "a0grs9"
+          },
+          "condition": "dialog.meeting == null || count(dialog.meeting) == 0",
+          "actions": [
+            {
+              "$kind": "Microsoft.EndDialog",
+              "$designer": {
+                "id": "Z4JNXo"
+              }
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.ConfirmInput",
+          "$designer": {
+            "id": "Fm38sQ"
+          },
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "defaultLocale": "en-us",
+          "style": "Auto",
+          "prompt": "${bfdprompt-Fm38sQ()}",
+          "confirmChoices": [
+            {
+              "value": "Yes",
+              "synonyms": [
+                "sure"
+              ]
+            },
+            {
+              "value": "No",
+              "synonyms": [
+                "nope"
+              ]
+            }
+          ],
+          "property": "dialog.confirm",
+          "outputFormat": "= this.value"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "GPQQWD"
+          },
+          "dialog": "DeleteMeetingRequest",
+          "options": {
+            "meetingId": "=dialog.meeting.id"
+          },
+          "resultProperty": "dialog.requestResult"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "MeUzZf"
+          },
+          "condition": "dialog.requestResult.requestStatus",
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "zvacDp"
+              },
+              "activity": "${bfdactivity-zvacDp()}"
+            }
+          ],
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "Nqbvyc"
+              },
+              "activity": "${bfdactivity-Nqbvyc()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "fuFvDL"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "DeleteMeetingDialog.lg"
+}
