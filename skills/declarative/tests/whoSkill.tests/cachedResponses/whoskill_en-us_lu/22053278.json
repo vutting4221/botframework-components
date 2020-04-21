@@ -1,0 +1,1 @@
+{"query":"Who emailed me about test?","prediction":{"topIntent":"EmailAbout","intents":{"EmailAbout":{"score":0.9865696}},"entities":{"Keyword":[{"Topic":["test"]}],"pron":[["me"]]}}}

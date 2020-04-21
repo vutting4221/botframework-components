@@ -1,0 +1,42 @@
+﻿{
+    "$schema":"../../../../schemas/sdk.schema",
+    "$kind":"Microsoft.Test.Script",
+    "settings":{
+        "connectionName":"msGraph"
+    },
+    "userTokens":[
+        {
+            "$kind":"Microsoft.Test.MockUserToken",
+            "connectionName":"msGraph",
+            "token":"token",
+            "magicCode":"000000"
+        }
+    ],
+    "dialog":"whoskill",
+    "script":[
+        {
+            "$kind":"Microsoft.Test.UserSays",
+            "text":"Who are the peers of allan?"
+        },
+        {
+            "$kind":"Microsoft.Test.AssertReplyActivity",
+            "assertions":[
+                "attachments[0].contentType == 'application/vnd.microsoft.card.oauth'"
+            ]
+        },
+        {
+            "$kind":"Microsoft.Test.UserSays",
+            "text":"000000"
+        },
+        {
+            "$kind":"Microsoft.Test.AssertReply",
+            "text":"I found 3 people who have the same manager as 'Allan Deyoung'."
+        },
+        {
+            "$kind":"Microsoft.Test.AssertReplyActivity",
+            "assertions":[
+                "attachments[0].contentType == 'application/vnd.microsoft.card.adaptive'"
+            ]
+        }
+    ]
+}

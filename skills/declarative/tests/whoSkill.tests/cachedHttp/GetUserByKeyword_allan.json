@@ -1,0 +1,23 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/users?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department&$filter=(startswith(displayName,'allan') or startswith(givenName,'allan') or startswith(surname,'allan') or startswith(mail,'allan') or startswith(userPrincipalName,'allan'))&$top=15",
+  "Responses": [
+    {
+      "Content": {
+        "value": [
+          {
+            "userType": "Member",
+            "displayName": "Allan Deyoung",
+            "mail": "AllanD@M365x035709.OnMicrosoft.com",
+            "jobTitle": "IT Admin",
+            "userPrincipalName": "AllanD@M365x035709.OnMicrosoft.com",
+            "id": "4662b907-6148-405c-8a0c-5c12f568d6f7",
+            "officeLocation": "24/1106",
+            "mobilePhone": "337845818",
+            "department": "IT"
+          }
+        ]
+      }
+    }
+  ]
+}

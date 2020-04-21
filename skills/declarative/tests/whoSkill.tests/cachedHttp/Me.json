@@ -1,0 +1,20 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/me?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department",
+  "Responses": [
+    {
+      "Content": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department)/$entity",
+        "userType": "Member",
+        "displayName": "Administrator MOD",
+        "mail": "admin@M365x035709.OnMicrosoft.com",
+        "jobTitle": null,
+        "userPrincipalName": "admin@M365x035709.onmicrosoft.com",
+        "id": "f30324f7-4352-4ff4-af1e-06ead69a80f1",
+        "officeLocation": null,
+        "mobilePhone": "425-882-1032",
+        "department": null
+      }
+    }
+  ]
+}

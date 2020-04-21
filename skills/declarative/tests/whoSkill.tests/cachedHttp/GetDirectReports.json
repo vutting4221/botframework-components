@@ -1,0 +1,60 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/users/d471984e-0495-4f08-bec1-ec8efe77c021/directReports?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department",
+  "Responses": [
+    {
+      "Content": {
+        "value": [
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "userType": "Member",
+            "displayName": "Pradeep Gupta",
+            "mail": "PradeepG@M365x035709.OnMicrosoft.com",
+            "jobTitle": "Accountant",
+            "userPrincipalName": "PradeepG@M365x035709.OnMicrosoft.com",
+            "id": "d3ddb6a4-4e0a-481c-b6a7-ad7375a20d50",
+            "officeLocation": "98/2202",
+            "mobilePhone": null,
+            "department": "Finance"
+          },
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "userType": "Member",
+            "displayName": "Joni Sherman",
+            "mail": "JoniS@M365x035709.OnMicrosoft.com",
+            "jobTitle": "Paralegal",
+            "userPrincipalName": "JoniS@M365x035709.OnMicrosoft.com",
+            "id": "b451d4b5-257d-4510-b6e9-2208c6a34ab2",
+            "officeLocation": "20/1109",
+            "mobilePhone": null,
+            "department": "Legal"
+          },
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "userType": "Member",
+            "displayName": "Allan Deyoung",
+            "mail": "AllanD@M365x035709.OnMicrosoft.com",
+            "jobTitle": "IT Admin",
+            "userPrincipalName": "AllanD@M365x035709.OnMicrosoft.com",
+            "id": "4662b907-6148-405c-8a0c-5c12f568d6f7",
+            "officeLocation": "24/1106",
+            "mobilePhone": null,
+            "department": "IT"
+          },
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "userType": "Member",
+            "displayName": "Diego Siciliani",
+            "mail": "DiegoS@M365x035709.OnMicrosoft.com",
+            "jobTitle": "HR Manager",
+            "userPrincipalName": "DiegoS@M365x035709.OnMicrosoft.com",
+            "id": "fa17786d-4209-404f-ad2b-690b7884d44c",
+            "officeLocation": "14/1108",
+            "mobilePhone": null,
+            "department": "HR"
+          }
+        ]
+      }
+    }
+  ]
+}

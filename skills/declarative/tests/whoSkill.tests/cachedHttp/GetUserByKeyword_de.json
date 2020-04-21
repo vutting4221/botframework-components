@@ -1,0 +1,45 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/users?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department&$filter=(startswith(displayName,'de') or startswith(givenName,'de') or startswith(surname,'de') or startswith(mail,'de') or startswith(userPrincipalName,'de'))&$top=15",
+  "Responses": [
+    {
+      "Content": {
+        "value": [
+          {
+            "userType": null,
+            "displayName": "Debra Berger",
+            "mail": "DebraB@M365x035709.OnMicrosoft.com",
+            "jobTitle": null,
+            "userPrincipalName": "DebraB@M365x035709.OnMicrosoft.com",
+            "id": "69b2336c-c3a9-43eb-b2e2-64d6f42ff734",
+            "officeLocation": null,
+            "mobilePhone": null,
+            "department": null
+          },
+          {
+            "userType": null,
+            "displayName": "Delia Dennis",
+            "mail": null,
+            "jobTitle": null,
+            "userPrincipalName": "DeliaD@M365x035709.OnMicrosoft.com",
+            "id": "67c68604-821a-40b2-96f3-917a09e89073",
+            "officeLocation": null,
+            "mobilePhone": null,
+            "department": null
+          },
+          {
+            "userType": null,
+            "displayName": "Allan Deyoung",
+            "mail": "AllanD@M365x035709.OnMicrosoft.com",
+            "jobTitle": null,
+            "userPrincipalName": "AllanD@M365x035709.OnMicrosoft.com",
+            "id": "4662b907-6148-405c-8a0c-5c12f568d6f7",
+            "officeLocation": null,
+            "mobilePhone": null,
+            "department": null
+          }
+        ]
+      }
+    }
+  ]
+}

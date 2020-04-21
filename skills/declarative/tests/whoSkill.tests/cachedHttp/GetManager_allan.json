@@ -1,0 +1,19 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/users/4662b907-6148-405c-8a0c-5c12f568d6f7/manager?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department",
+  "Responses": [
+    {
+      "Content": {
+        "userType": "Member",
+        "displayName": "Nestor Wilke",
+        "mail": "NestorW@M365x035709.OnMicrosoft.com",
+        "jobTitle": "Director",
+        "userPrincipalName": "NestorW@M365x035709.OnMicrosoft.com",
+        "id": "d471984e-0495-4f08-bec1-ec8efe77c021",
+        "officeLocation": "36/2121",
+        "mobilePhone": null,
+        "department": "Operations"
+      }
+    }
+  ]
+}

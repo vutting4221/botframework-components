@@ -1,0 +1,23 @@
+{
+  "Method": "GET",
+  "Url": "https://graph.microsoft.com/v1.0/users?$select=userType,displayName,mail,jobTitle,userPrincipalName,id,officeLocation,mobilePhone,department&$filter=(startswith(displayName,'JoniS@M365x035709.OnMicrosoft.com') or startswith(givenName,'JoniS@M365x035709.OnMicrosoft.com') or startswith(surname,'JoniS@M365x035709.OnMicrosoft.com') or startswith(mail,'JoniS@M365x035709.OnMicrosoft.com') or startswith(userPrincipalName,'JoniS@M365x035709.OnMicrosoft.com'))&$top=15",
+  "Responses": [
+    {
+      "Content": {
+        "value": [
+          {
+            "userType": "Member",
+            "displayName": "Joni Sherman",
+            "mail": "JoniS@M365x035709.OnMicrosoft.com",
+            "jobTitle": "Paralegal",
+            "userPrincipalName": "JoniS@M365x035709.OnMicrosoft.com",
+            "id": "b451d4b5-257d-4510-b6e9-2208c6a34ab2",
+            "officeLocation": "20/1109",
+            "mobilePhone": null,
+            "department": "Legal"
+          }
+        ]
+      }
+    }
+  ]
+}
