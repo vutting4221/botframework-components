@@ -18,10 +18,15 @@ namespace PointOfInterestSkill.Dialogs
 {
     public class GetDirectionsDialog : PointOfInterestDialogBase
     {
+        private ShortMemoryState _shortMemoryState;
+
         public GetDirectionsDialog(
+            ShortMemoryState shortMemoryState,
             IServiceProvider serviceProvider)
             : base(nameof(GetDirectionsDialog), serviceProvider)
         {
+            _shortMemoryState = shortMemoryState ?? throw new ArgumentNullException(nameof(shortMemoryState));
+
             var checkCurrentLocation = new WaterfallStep[]
             {
                 CheckForCurrentCoordinatesBeforeGetDirectionsAsync,
@@ -49,6 +54,19 @@ namespace PointOfInterestSkill.Dialogs
             var state = await Accessor.GetAsync(sc.Context, () => new PointOfInterestSkillState(), cancellationToken);
             var hasCurrentCoordinates = state.CheckForValidCurrentCoordinates();
             if (hasCurrentCoordinates || !string.IsNullOrEmpty(state.Address))
+            {
+                return await sc.ReplaceDialogAsync(Actions.FindPointOfInterest, cancellationToken: cancellationToken);
+            }
+
+            var shortMemoryState = _shortMemoryState.CreateProperty<string>("Location");
+
+            //await shortMemoryState.SetAsync(sc.Context, "19829 23rd dr se, Bothell, WA 98012");
+
+            //await _shortMemoryState.SaveChangesAsync(sc.Context, true);
+
+            var location = await shortMemoryState.GetAsync(sc.Context);
+
+            if (!string.IsNullOrWhiteSpace(location))
             {
                 return await sc.ReplaceDialogAsync(Actions.FindPointOfInterest, cancellationToken: cancellationToken);
             }

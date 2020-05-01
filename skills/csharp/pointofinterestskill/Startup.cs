@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Linq;
+using System.Net.Http;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -105,6 +106,10 @@ namespace PointOfInterestSkill
                 var conversationState = sp.GetService<ConversationState>();
                 return new BotStateSet(userState, conversationState);
             });
+
+            services.AddSingleton(new HttpClient());
+            services.AddSingleton<IRestStorage, ShortMemoryRestStorage>();
+            services.AddSingleton<ShortMemoryState>();
 
             // Configure proactive
             services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
