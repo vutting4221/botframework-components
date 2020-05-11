@@ -1,5 +1,5 @@
 # WelcomeUser
-- Welcome to the EchoBot sample.
+- Welcome to the Ticket Skill.
 
 # StatusCard(OpenRequestNumber, RequestId, Requestor, RequestType, RequestQuantity, RequestStatus, Urgency)
 - ```
