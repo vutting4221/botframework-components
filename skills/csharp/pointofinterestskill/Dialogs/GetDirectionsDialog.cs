@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Solutions.Responses;
+using Microsoft.Extensions.Options;
 using PointOfInterestSkill.Models;
 using PointOfInterestSkill.Responses.Shared;
 using PointOfInterestSkill.Services;
@@ -18,14 +20,17 @@ namespace PointOfInterestSkill.Dialogs
 {
     public class GetDirectionsDialog : PointOfInterestDialogBase
     {
-        private ShortMemoryState _shortMemoryState;
+        private readonly ShortMemoryState _shortMemoryState;
+        private readonly IOptions<Models.Usersharedproperty> _optionAccessor;
 
         public GetDirectionsDialog(
             ShortMemoryState shortMemoryState,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IOptions<Models.Usersharedproperty> optionAccessor)
             : base(nameof(GetDirectionsDialog), serviceProvider)
         {
             _shortMemoryState = shortMemoryState ?? throw new ArgumentNullException(nameof(shortMemoryState));
+            _optionAccessor = optionAccessor;
 
             var checkCurrentLocation = new WaterfallStep[]
             {
@@ -58,9 +63,10 @@ namespace PointOfInterestSkill.Dialogs
                 return await sc.ReplaceDialogAsync(Actions.FindPointOfInterest, cancellationToken: cancellationToken);
             }
 
-            var shortMemoryState = _shortMemoryState.CreateProperty<string>("Location");
+            var propertyName = _optionAccessor.Value.UserSharedData.Name;
+            var shortMemoryState = _shortMemoryState.CreateProperty<string>(propertyName);
 
-            //await shortMemoryState.SetAsync(sc.Context, "19829 23rd dr se, Bothell, WA 98012");
+            //await shortMemoryState.SetAsync(sc.Context, "CurrentLocation");
 
             //await _shortMemoryState.SaveChangesAsync(sc.Context, true);
 

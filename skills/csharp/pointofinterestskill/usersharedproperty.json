@@ -1,0 +1,10 @@
+{
+"UserSharedData":
+  {
+    "name": "Location",
+    "properties": {
+      "type": "string",
+      "description": "User Current Location"
+    }
+  }
+}

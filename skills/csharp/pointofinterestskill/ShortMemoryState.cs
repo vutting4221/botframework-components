@@ -4,21 +4,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Newtonsoft.Json.Linq;
+using PointOfInterestSkill.FactoryStorage;
 using SkillServiceLibrary.Utilities;
 
 namespace PointOfInterestSkill
 {
-    public class ShortMemoryState
+    public class ShortMemoryState : UserState
     {
         public const string ShortMemoryPropertyName = "ShortMemory";
         private readonly string _contextServiceKey;
+        private readonly ITurnContextAwareStorage _storageFactory;
         private IRestStorage _restStorage;
         private IStorage _storage;
 
-        public ShortMemoryState(IStorage storage, IRestStorage restStorage)
+        //public ShortMemoryState(IStorage storage, IRestStorage restStorage)
+        //{
+        //    _storage = storage ?? throw new ArgumentNullException(nameof(storage));
+        //    _restStorage = restStorage ?? throw new ArgumentNullException(nameof(restStorage));
+        //    _contextServiceKey = nameof(ShortMemoryState);
+        //}
+
+        public ShortMemoryState(ITurnContextAwareStorage storageFactory, IStorage storage)
+            : base(storage)
         {
-            _storage = storage ?? throw new ArgumentNullException(nameof(storage));
-            _restStorage = restStorage ?? throw new ArgumentNullException(nameof(restStorage));
+            _storageFactory = storageFactory;
             _contextServiceKey = nameof(ShortMemoryState);
         }
 
@@ -50,7 +59,7 @@ namespace PointOfInterestSkill
         /// or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> is <c>null</c>.</exception>
-        public async Task LoadAsync(ITurnContext turnContext, bool force = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task LoadAsync(ITurnContext turnContext, bool force = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {
@@ -64,15 +73,7 @@ namespace PointOfInterestSkill
                 IDictionary<string, object> items;
                 object val;
 
-                if (turnContext.IsSkill())
-                {
-                    val = await _restStorage.ReadAsync(turnContext, cancellationToken);
-                }
-                else
-                {
-                    items = await _storage.ReadAsync(new[] { storageKey }, cancellationToken).ConfigureAwait(false);
-                    items.TryGetValue(storageKey, out val);
-                }
+                val = await _storageFactory.ReadAsync(turnContext, cancellationToken);
 
                 if (val is IDictionary<string, object> asDictionary)
                 {
@@ -107,7 +108,7 @@ namespace PointOfInterestSkill
         /// or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> is <c>null</c>.</exception>
-        public async Task SaveChangesAsync(ITurnContext turnContext, bool force = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task SaveChangesAsync(ITurnContext turnContext, bool force = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {
@@ -117,21 +118,7 @@ namespace PointOfInterestSkill
             var cachedState = turnContext.TurnState.Get<CachedShortMemoryState>(_contextServiceKey);
             if (cachedState != null && (force || cachedState.IsChanged()))
             {
-                var key = GetStorageKey(turnContext);
-                var changes = new Dictionary<string, object>
-                {
-                    { key, cachedState.State },
-                };
-
-                if (turnContext.IsSkill())
-                {
-                    await _restStorage.WriteAsync(turnContext, cachedState.State, cancellationToken);
-                }
-                else
-                {
-                    await _storage.WriteAsync(changes).ConfigureAwait(false);
-                }
-
+                await _storageFactory.WriteAsync(turnContext, cachedState.State, cancellationToken);
                 cachedState.Hash = cachedState.ComputeHash(cachedState.State);
                 return;
             }
@@ -149,7 +136,7 @@ namespace PointOfInterestSkill
         /// change in the storage layer.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> is <c>null</c>.</exception>
-        public Task ClearStateAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        public override Task ClearStateAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {
@@ -163,29 +150,11 @@ namespace PointOfInterestSkill
         }
 
         /// <summary>
-        /// Gets a copy of the raw cached data for this <see cref="BotState"/> from the turn context.
-        /// </summary>
-        /// <param name="turnContext">The context object for this turn.</param>
-        /// <returns>A JSON representation of the cached state.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> is <c>null</c>.</exception>
-        public JToken Get(ITurnContext turnContext)
-        {
-            if (turnContext == null)
-            {
-                throw new ArgumentNullException(nameof(turnContext));
-            }
-
-            var stateKey = this.GetType().Name;
-            var cachedState = turnContext.TurnState.Get<object>(stateKey);
-            return JObject.FromObject(cachedState)["State"];
-        }
-
-        /// <summary>
         /// When overridden in a derived class, gets the key to use when reading and writing state to and from storage.
         /// </summary>
         /// <param name="turnContext">The context object for this turn.</param>
         /// <returns>The storage key.</returns>
-        public string GetStorageKey(ITurnContext turnContext)
+        protected override string GetStorageKey(ITurnContext turnContext)
         {
             var channelId = turnContext.Activity.ChannelId ?? throw new ArgumentNullException("invalid activity-missing channelId");
             var userId = turnContext.Activity.From?.Id ?? throw new ArgumentNullException("invalid activity-missing From.Id");
@@ -204,7 +173,7 @@ namespace PointOfInterestSkill
         /// <remarks>If the task is successful, the result contains the property value, otherwise it will be default(T).</remarks>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> or
         /// <paramref name="propertyName"/> is <c>null</c>.</exception>
-        public Task<T> GetPropertyValueAsync<T>(ITurnContext turnContext, string propertyName, CancellationToken cancellationToken = default(CancellationToken))
+        public new Task<T> GetPropertyValueAsync<T>(ITurnContext turnContext, string propertyName, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {
@@ -264,7 +233,7 @@ namespace PointOfInterestSkill
         /// <returns>A task that represents the work queued to execute.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> or
         /// <paramref name="propertyName"/> is <c>null</c>.</exception>
-        public Task DeletePropertyValueAsync(ITurnContext turnContext, string propertyName, CancellationToken cancellationToken = default(CancellationToken))
+        public new Task DeletePropertyValueAsync(ITurnContext turnContext, string propertyName, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {
@@ -292,7 +261,7 @@ namespace PointOfInterestSkill
         /// <returns>A task that represents the work queued to execute.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="turnContext"/> or
         /// <paramref name="propertyName"/> is <c>null</c>.</exception>
-        public Task SetPropertyValueAsync(ITurnContext turnContext, string propertyName, object value, CancellationToken cancellationToken = default(CancellationToken))
+        public new Task SetPropertyValueAsync(ITurnContext turnContext, string propertyName, object value, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (turnContext == null)
             {

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.Bot.Builder;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Builder;
-using Newtonsoft.Json;
 
 namespace PointOfInterestSkill
 {
-    public class ShortMemoryRestStorage : IRestStorage
+    public class RestStorage : IStorageExtended
     {
         private const string ApiEndpoint = "state";
         private const string ShortMemoryPropertyName = "ShortMemory";
@@ -16,17 +17,27 @@ namespace PointOfInterestSkill
         private const string PropertyNameKeyName = "PropertyName";
         private HttpClient _httpClient;
 
-        public ShortMemoryRestStorage(HttpClient httpClient)
+        public RestStorage(HttpClient httpClient)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<IDictionary<string, object>> ReadAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
+        public Task DeleteAsync(string[] keys, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDictionary<string, object>> ReadAsync(string[] keys, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IDictionary<string, object>> TurnContextAwareReadAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
         {
             using (var httpRequestMessage = new HttpRequestMessage())
             {
                 var activity = turnContext.Activity;
-                activity.ServiceUrl = "https://sidlocalhost.ngrok.io/api/skills/";
+
                 httpRequestMessage.Method = HttpMethod.Get;
                 httpRequestMessage.RequestUri = new Uri($"{activity.ServiceUrl}{ApiEndpoint}?{ConversationIdKeyName}={turnContext.Activity.Conversation.Id}&{PropertyNameKeyName}={ShortMemoryPropertyName}");
 
@@ -38,7 +49,7 @@ namespace PointOfInterestSkill
             }
         }
 
-        public async Task WriteAsync(ITurnContext turnContext, IDictionary<string, object> data, CancellationToken cancellationToken = default)
+        public async Task TurnContextAwareWriteAsync(ITurnContext turnContext, IDictionary<string, object> data, CancellationToken cancellationToken = default)
         {
             using (var httpRequestMessage = new HttpRequestMessage())
             {
@@ -56,6 +67,11 @@ namespace PointOfInterestSkill
 
                 await _httpClient.SendAsync(httpRequestMessage, cancellationToken).ConfigureAwait(false);
             }
+        }
+
+        public Task WriteAsync(IDictionary<string, object> changes, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.Bot.Builder.BotFramework;
 using Microsoft.Bot.Builder.Integration.ApplicationInsights.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Schema;
 using Microsoft.Bot.Solutions;
 using Microsoft.Bot.Solutions.Responses;
 using Microsoft.Bot.Solutions.TaskExtensions;
@@ -24,6 +25,8 @@ using Microsoft.Extensions.Hosting;
 using PointOfInterestSkill.Adapters;
 using PointOfInterestSkill.Bots;
 using PointOfInterestSkill.Dialogs;
+using PointOfInterestSkill.FactoryStorage;
+using PointOfInterestSkill.Models;
 using PointOfInterestSkill.Responses.CancelRoute;
 using PointOfInterestSkill.Responses.FindPointOfInterest;
 using PointOfInterestSkill.Responses.Main;
@@ -45,6 +48,7 @@ namespace PointOfInterestSkill
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddJsonFile("cognitivemodels.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"cognitivemodels.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("usersharedproperty.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -73,6 +77,7 @@ namespace PointOfInterestSkill
             Configuration.Bind(settings);
             services.AddSingleton<BotSettings>(settings);
             services.AddSingleton<BotSettingsBase>(settings);
+            services.Configure<Usersharedproperty>(Configuration);
 
             // Configure channel provider
             services.AddSingleton<IChannelProvider, ConfigurationChannelProvider>();
@@ -109,7 +114,9 @@ namespace PointOfInterestSkill
 
             services.AddSingleton(new HttpClient());
             services.AddSingleton<IRestStorage, ShortMemoryRestStorage>();
+            services.AddSingleton<IStorageExtended, RestStorage>();
             services.AddSingleton<ShortMemoryState>();
+            services.AddSingleton<ITurnContextAwareStorage, TurnContextAwareStorageFactory>();
 
             // Configure proactive
             services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
