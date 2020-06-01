@@ -23,6 +23,9 @@
 			"$ref": "#/definitions/ManageNotification"
 		},
 		{
+			"$ref": "#/definitions/Github.GetPullRequest"
+		},
+		{
 			"$ref": "#/definitions/Microsoft.ActivityTemplate"
 		},
 		{
@@ -4872,6 +4875,9 @@
 				},
 				{
 					"$ref": "#/definitions/Github.GetIssues"
+				},
+				{
+					"$ref": "#/definitions/Github.GetPullRequest"
 				},
 				{
 					"$ref": "#/definitions/Github.GetIssuesPerDayData"

@@ -20,6 +20,9 @@
 			"$ref": "#/definitions/ManageNotification"
 		},
 		{
+			"$ref": "#/definitions/Github.GetPullRequest"
+		},
+		{
 			"$ref": "#/definitions/Microsoft.ActivityTemplate"
 		},
 		{
@@ -688,6 +691,98 @@
 					"type": "string",
 					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
 					"const": "Github.GetIssuesPerDayData"
+				},
+				"$designer": {
+					"title": "Designer information",
+					"type": "object",
+					"description": "Extra information for the Bot Framework Composer."
+				}
+			}
+		},
+		"Github.GetPullRequest": {
+			"$role": "implements(Microsoft.IDialog)",
+			"type": "object",
+			"title": "Github.GetPullRequest",
+			"description": "Retrieve pullRequests using the github api.",
+			"required": [
+				"token",
+				"$kind"
+			],
+			"additionalProperties": false,
+			"patternProperties": {
+				"^\\$": {
+					"title": "Tooling property",
+					"description": "Open ended property for tooling."
+				}
+			},
+			"properties": {
+				"id": {
+					"type": "string",
+					"title": "Id",
+					"description": "Optional id for the dialog"
+				},
+				"resultProperty": {
+					"$ref": "#/definitions/Github.GetIssues/properties/resultProperty",
+					"title": "result property",
+					"description": "result property",
+					"examples": [
+						"dialog.pullRequests"
+					]
+				},
+				"owner": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "Owner",
+					"description": "Github repo owner",
+					"examples": [
+						"microsoft"
+					]
+				},
+				"name": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "Name",
+					"description": "Github repo name",
+					"examples": [
+						"botframework-solutions"
+					]
+				},
+				"status": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "Status",
+					"description": "status",
+					"examples": [
+						"open"
+					]
+				},
+				"createOrUpdate": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "createOrUpdate",
+					"description": "createOrUpdate",
+					"examples": [
+						"update"
+					]
+				},
+				"startDate": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "startDate",
+					"description": "startDate",
+					"examples": [
+						"dialog.startDate"
+					]
+				},
+				"endDate": {
+					"$ref": "#/definitions/Github.GetIssues/properties/name",
+					"title": "endDate",
+					"description": "endDate",
+					"examples": [
+						"dialog.endDate"
+					]
+				},
+				"$kind": {
+					"title": "Kind of dialog object",
+					"description": "Defines the valid properties for the component you are configuring (from a dialog .schema file)",
+					"type": "string",
+					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
+					"const": "Github.GetPullRequest"
 				},
 				"$designer": {
 					"title": "Designer information",
@@ -4907,6 +5002,9 @@
 				},
 				{
 					"$ref": "#/definitions/ManageNotification"
+				},
+				{
+					"$ref": "#/definitions/Github.GetPullRequest"
 				},
 				{
 					"$ref": "#/definitions/Microsoft.Graph.Email.SendEmail"

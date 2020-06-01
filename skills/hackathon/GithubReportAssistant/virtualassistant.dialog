@@ -300,6 +300,31 @@
           "value": "=user.label"
         },
         {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "d1MMBX"
+          },
+          "activityProcessed": true,
+          "dialog": "GetGithubPullRequest",
+          "options": {
+            "startDate": "=addDays(utcNow(), -1)",
+            "endDate": "=utcNow()",
+            "createOrUpdate": "update"
+          }
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "TU7u4g"
+          },
+          "activityProcessed": true,
+          "dialog": "ShowGithubPullRequest",
+          "options": {
+            "title": "Pull Requests Updated Today:",
+            "fallbackTitle": "Sorry no pull request updated for today."
+          }
+        },
+        {
           "$kind": "Microsoft.IfCondition",
           "$designer": {
             "id": "guifx8"
@@ -563,6 +588,23 @@
           },
           "activityProcessed": true,
           "dialog": "StopNotification"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "qTd2pL"
+      },
+      "intent": "ShowPR",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "9q0R0C"
+          },
+          "activityProcessed": true,
+          "dialog": "GetGithubPullRequest"
         }
       ]
     }

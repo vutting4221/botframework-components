@@ -1,0 +1,82 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "lDzPBB",
+    "name": "GetGithubPullRequest"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "id": "a9iN73"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TraceActivity",
+          "$designer": {
+            "id": "2LUS4i"
+          },
+          "name": "get pr"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "JB9LOy"
+          },
+          "property": "dialog.owner",
+          "value": "=user.owner"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "Vzr3S3"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_Vzr3S3()}",
+          "property": "dialog.owner"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "6sto4M"
+          },
+          "property": "dialog.name",
+          "value": "=user.branchName"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "QAM3mM"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_QAM3mM()}",
+          "property": "dialog.name"
+        },
+        {
+          "$kind": "Github.GetPullRequest",
+          "$designer": {
+            "id": "ee8p1F"
+          },
+          "resultProperty": "turn.pullRequest",
+          "name": "=dialog.name",
+          "owner": "=dialog.owner",
+          "status": "open",
+          "createOrUpdate": "update",
+          "startDate": "=dialog.startDate",
+          "endDate": "=dialog.endDate"
+        }
+      ]
+    }
+  ],
+  "dialogType": "none",
+  "generator": "GetGithubPullRequest.lg"
+}
