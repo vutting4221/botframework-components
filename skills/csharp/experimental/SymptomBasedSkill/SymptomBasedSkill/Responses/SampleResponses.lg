@@ -1,0 +1,41 @@
+﻿> ------------ Activity templates ------------
+
+# NamePrompt
+[Activity
+    Text = ${NamePromptText()}
+    InputHint = expectingInput
+]
+
+# HaveNameMessage
+[Activity
+    Text = ${HaveNameMessageText()}
+    InputHint = acceptingInput
+]
+
+# CheckFeverMessage
+[Activity
+    Text = ${DoYouHaveFeverText()}
+    InputHint = acceptingInput
+]
+
+# CheckCoughMessage
+[Activity
+    Text = ${DoYouHaveCoughText()}
+    InputHint = acceptingInput
+]
+
+
+> ------------ Text templates ------------
+
+# NamePromptText
+- What is your name?
+
+# HaveNameMessageText
+- Hi, ${Name}!
+- Nice to meet you, ${Name}!
+
+# DoYouHaveFeverText
+- do you have fever?
+
+# DoYouHaveCoughText
+- do you have a cough?
