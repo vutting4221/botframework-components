@@ -43,8 +43,18 @@
     </Content>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup />
   <ItemGroup>
+    <Compile Update="Responses\CancelRoute\CancelRouteResponses.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CancelRouteResponses.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Responses\CancelRoute\CancelRouteResponses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CancelRouteResponses.cs</LastGenOutput>
+    </None>
     <None Update="Responses\Shared\Shared.lg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
