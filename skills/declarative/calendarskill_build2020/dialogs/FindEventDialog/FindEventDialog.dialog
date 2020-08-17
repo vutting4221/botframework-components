@@ -47,6 +47,13 @@
           ]
         },
         {
+          "$kind": "Microsoft.TraceActivity",
+          "$designer": {
+            "id": "qkhAkt"
+          },
+          "name": "PropertyReadOut"
+        },
+        {
           "$kind": "Microsoft.BeginDialog",
           "$designer": {
             "id": "wD89cS"

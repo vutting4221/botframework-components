@@ -118,7 +118,10 @@
                   },
                   "choices": "=dialog.eventChoiceOptions",
                   "property": "dialog.selectedEvent",
-                  "style": "heroCard"
+                  "style": "heroCard",
+                  "recognizerOptions": {
+                    "recognizeOrdinals": true
+                  }
                 },
                 {
                   "$kind": "Microsoft.EndDialog",

@@ -4,7 +4,7 @@
 - I couldn't find any meetings matching your criteria. Please try again.
 
 # SendActivity_0VoJmG()
-- ${GetLocation(dialog.selectedEvent)}
+- Your meeting is in ${GetLocation(dialog.selectedEvent)}.
 
     # GetLocation(event)
 - IF: ${(event.location.displayName != null && event.location.displayName != '') && event.isOnlineMeeting == true }

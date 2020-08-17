@@ -26,7 +26,7 @@ ${if(dialog.personNameArray != null, concat('* Attendees: ', join(dialog.personN
 {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "type": "AdaptiveCard",
-    "version": "1.0",
+    "version": "1.2",
     "body": [
         {
             "type": "Container",
@@ -62,9 +62,9 @@ ${if(dialog.personNameArray != null, concat('* Attendees: ', join(dialog.personN
             "separator": true,
             "style": "default",
             "items": [
-                ${join(foreach(previousEvents, x, BuildPreviousEventItem(x)), ', ')},
-                ${if(IsToday(datetime), BuildSeparator(), '')},
-                ${join(foreach(upcomingEvents, x, BuildUpcomingEventItem(x)), ', ')}
+                ${if(previousEvents != null && count(previousEvents) > 0, join(foreach(previousEvents, x, BuildPreviousEventItem(x)), ', '), BuildHiddenItem())},
+                ${if(IsToday(datetime), BuildSeparator(), BuildHiddenItem())},
+                ${if(upcomingEvents != null && count(upcomingEvents) > 0, join(foreach(upcomingEvents, x, BuildUpcomingEventItem(x)), ', '), BuildHiddenItem())}
             ]
         },
         {
@@ -153,6 +153,15 @@ ${if(dialog.personNameArray != null, concat('* Attendees: ', join(dialog.personN
 }
 ```
 
+# BuildHiddenItem()
+- ```
+{
+    "type": "TextBlock",
+    "title":"test",
+    "isVisible": false
+}
+```
+
 # BuildUpcomingEventItem(event)
 - ```
 {
@@ -183,7 +192,7 @@ ${if(dialog.personNameArray != null, concat('* Attendees: ', join(dialog.personN
             "items": [
                 {
                     "type": "TextBlock",
-                    "text": "${event.Subject}",
+                    "text": "${string(event.Subject)}",
                     "weight": "Bolder"
                 },
                 {

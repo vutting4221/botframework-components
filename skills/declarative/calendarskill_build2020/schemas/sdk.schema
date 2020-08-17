@@ -20,10 +20,16 @@
 			"$ref": "#/definitions/Microsoft.AttachmentInput"
 		},
 		{
+			"$ref": "#/definitions/Microsoft.AzureSearch.Calendar.GetMeetingRooms"
+		},
+		{
 			"$ref": "#/definitions/Microsoft.BeginDialog"
 		},
 		{
 			"$ref": "#/definitions/Microsoft.BeginSkill"
+		},
+		{
+			"$ref": "#/definitions/Microsoft.Bot.Solutions.CustomAuthInput"
 		},
 		{
 			"$ref": "#/definitions/Microsoft.Bot.Solutions.CustomGotoAction"
@@ -144,9 +150,6 @@
 		},
 		{
 			"$ref": "#/definitions/Microsoft.Graph.Calendar.GetEvents"
-		},
-		{
-			"$ref": "#/definitions/Microsoft.Graph.Calendar.GetMeetingRooms"
 		},
 		{
 			"$ref": "#/definitions/Microsoft.Graph.Calendar.GetMeetings"
@@ -1043,6 +1046,103 @@
 				}
 			}
 		},
+		"Microsoft.AzureSearch.Calendar.GetMeetingRooms": {
+			"$role": "implements(Microsoft.IDialog)",
+			"type": "object",
+			"title": "Microsoft AzureSearch - Get Meeting Rooms",
+			"description": "Get meeting room lists using the Azure search API.",
+			"required": [
+				"searchServiceAdminApiKey",
+				"searchServiceName",
+				"searchIndexName",
+				"building",
+				"floorNumber",
+				"meetingRoom",
+				"$kind"
+			],
+			"additionalProperties": false,
+			"patternProperties": {
+				"^\\$": {
+					"title": "Tooling property",
+					"description": "Open ended property for tooling."
+				}
+			},
+			"properties": {
+				"id": {
+					"type": "string",
+					"title": "Id",
+					"description": "Optional id for the dialog"
+				},
+				"resultProperty": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/resultProperty",
+					"title": "Result property",
+					"description": "Property to store the result of this action. The result includes 4 properties from the http response: statusCode, reasonPhrase, content and headers. If the content is json it will be a deserialized object.",
+					"examples": [
+						"dialog.contosodata"
+					]
+				},
+				"searchServiceAdminApiKey": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "Search Service Admin Api Key",
+					"description": "Azure Search Service Admin API Key.",
+					"examples": [
+						"settings.azureSearch.searchServiceAdminApiKey"
+					]
+				},
+				"searchServiceName": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "Search Service Name",
+					"description": "Azure Search Service Name.",
+					"examples": [
+						"settings.azureSearch.searchServiceName"
+					]
+				},
+				"searchIndexName": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "Search Index Name",
+					"description": "Azure Search Index Name.",
+					"examples": [
+						"settings.azureSearch.searchIndexName"
+					]
+				},
+				"building": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "building name",
+					"description": "The building of the meeting room.",
+					"examples": [
+						"dialog.building"
+					]
+				},
+				"floorNumber": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "floorNumber",
+					"description": "The floorNumber of the meeting room",
+					"examples": [
+						"dialog.floorNumber"
+					]
+				},
+				"meetingRoom": {
+					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
+					"title": "room name",
+					"description": "The name of the meeting room.",
+					"examples": [
+						"dialog.meetingRoom"
+					]
+				},
+				"$kind": {
+					"title": "Kind of dialog object",
+					"description": "Defines the valid properties for the component you are configuring (from a dialog .schema file)",
+					"type": "string",
+					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
+					"const": "Microsoft.AzureSearch.Calendar.GetMeetingRooms"
+				},
+				"$designer": {
+					"title": "Designer information",
+					"type": "object",
+					"description": "Extra information for the Bot Framework Composer."
+				}
+			}
+		},
 		"Microsoft.BeginDialog": {
 			"$role": "implements(Microsoft.IDialog)",
 			"title": "Begin a dialog",
@@ -1227,6 +1327,155 @@
 					"type": "string",
 					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
 					"const": "Microsoft.BeginSkill"
+				},
+				"$designer": {
+					"title": "Designer information",
+					"type": "object",
+					"description": "Extra information for the Bot Framework Composer."
+				}
+			}
+		},
+		"Microsoft.Bot.Solutions.CustomAuthInput": {
+			"$role": "implements(Microsoft.IDialog)",
+			"title": "Custom OAuthInput Dialog",
+			"description": "Collect login information.",
+			"type": "object",
+			"required": [
+				"connectionName",
+				"$kind"
+			],
+			"additionalProperties": false,
+			"patternProperties": {
+				"^\\$": {
+					"title": "Tooling property",
+					"description": "Open ended property for tooling."
+				}
+			},
+			"properties": {
+				"appId": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Application Id",
+					"description": "The Application Id of the app that will provide the user token.",
+					"examples": [
+						"settings.msAppId"
+					]
+				},
+				"appPassword": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Application Password",
+					"description": "The Application Password of the app that will provide the user token.",
+					"examples": [
+						"settings.msAppPassword"
+					]
+				},
+				"connectionName": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Connection name",
+					"description": "The connection name configured in Azure Web App Bot OAuth settings.",
+					"examples": [
+						"msgraphOAuthConnection"
+					]
+				},
+				"disabled": {
+					"$ref": "#/definitions/booleanExpression",
+					"title": "Disabled",
+					"description": "Optional condition which if true will disable this action.",
+					"examples": [
+						true,
+						"=user.age > 3"
+					]
+				},
+				"text": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Text",
+					"description": "Text shown in the OAuth signin card.",
+					"examples": [
+						"Please sign in. ",
+						"=concat(x,y,z)"
+					]
+				},
+				"title": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Title",
+					"description": "Title shown in the OAuth signin card.",
+					"examples": [
+						"Login"
+					]
+				},
+				"timeout": {
+					"$ref": "#/definitions/integerExpression",
+					"title": "Timeout",
+					"description": "Time out setting for the OAuth signin card.",
+					"default": 900000
+				},
+				"property": {
+					"$ref": "#/definitions/stringExpression",
+					"title": "Token property",
+					"description": "Property to store the OAuth token result.",
+					"examples": [
+						"dialog.token"
+					]
+				},
+				"invalidPrompt": {
+					"$kind": "Microsoft.IActivityTemplate",
+					"title": "Invalid prompt",
+					"description": "Message to send if user response is invalid.",
+					"examples": [
+						"Sorry, the login info you provided is not valid."
+					],
+					"$ref": "#/definitions/Microsoft.IActivityTemplate"
+				},
+				"defaultValueResponse": {
+					"$kind": "Microsoft.IActivityTemplate",
+					"title": "Default value response",
+					"description": "Message to send when max turn count (if specified) has been exceeded and the default value is selected as the value.",
+					"examples": [
+						"Login failed."
+					],
+					"$ref": "#/definitions/Microsoft.IActivityTemplate"
+				},
+				"maxTurnCount": {
+					"$ref": "#/definitions/integerExpression",
+					"title": "Max turn count",
+					"description": "Maximum number of re-prompt attempts to collect information.",
+					"default": 3,
+					"examples": [
+						3
+					]
+				},
+				"defaultValue": {
+					"$ref": "#/definitions/expression",
+					"title": "Default value",
+					"description": "Expression to examine on each turn of the conversation as possible value to the property.",
+					"examples": [
+						"@token"
+					]
+				},
+				"allowInterruptions": {
+					"$ref": "#/definitions/booleanExpression",
+					"title": "Allow Interruptions",
+					"description": "A boolean expression that determines whether the parent should be allowed to interrupt the input.",
+					"default": true,
+					"examples": [
+						true,
+						"=f(x)"
+					]
+				},
+				"alwaysPrompt": {
+					"$ref": "#/definitions/booleanExpression",
+					"title": "Always prompt",
+					"description": "Collect information even if the specified 'property' is not empty.",
+					"examples": [
+						true,
+						"=f(x)"
+					]
+				},
+				"$kind": {
+					"title": "Kind of dialog object",
+					"description": "Defines the valid properties for the component you are configuring (from a dialog .schema file)",
+					"type": "string",
+					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
+					"const": "Microsoft.Bot.Solutions.CustomAuthInput"
 				},
 				"$designer": {
 					"title": "Designer information",
@@ -4226,85 +4475,6 @@
 				}
 			}
 		},
-		"Microsoft.Graph.Calendar.GetMeetingRooms": {
-			"$role": "implements(Microsoft.IDialog)",
-			"type": "object",
-			"title": "Microsoft Graph - Get Meeting Rooms",
-			"description": "Get meeting room lists using the Azure search API.",
-			"required": [
-				"searchServiceAdminApiKey",
-				"searchServiceName",
-				"searchIndexName",
-				"searchQuery",
-				"$kind"
-			],
-			"additionalProperties": false,
-			"patternProperties": {
-				"^\\$": {
-					"title": "Tooling property",
-					"description": "Open ended property for tooling."
-				}
-			},
-			"properties": {
-				"id": {
-					"type": "string",
-					"title": "Id",
-					"description": "Optional id for the dialog"
-				},
-				"resultProperty": {
-					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/resultProperty",
-					"title": "Result property",
-					"description": "Property to store the result of this action. The result includes 4 properties from the http response: statusCode, reasonPhrase, content and headers. If the content is json it will be a deserialized object.",
-					"examples": [
-						"dialog.contosodata"
-					]
-				},
-				"searchServiceAdminApiKey": {
-					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
-					"title": "Search Service Admin Api Key",
-					"description": "Azure Search Service Admin API Key.",
-					"examples": [
-						"settings.azureSearch.searchServiceAdminApiKey"
-					]
-				},
-				"searchServiceName": {
-					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
-					"title": "Search Service Name",
-					"description": "Azure Search Service Name.",
-					"examples": [
-						"settings.azureSearch.searchServiceName"
-					]
-				},
-				"searchIndexName": {
-					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
-					"title": "Search Index Name",
-					"description": "Azure Search Index Name.",
-					"examples": [
-						"settings.azureSearch.searchIndexName"
-					]
-				},
-				"searchQuery": {
-					"$ref": "#/definitions/Microsoft.Graph.GetMe/properties/token",
-					"title": "Search Query",
-					"description": "Azure Search Query.",
-					"examples": [
-						"dialog.searchQuery"
-					]
-				},
-				"$kind": {
-					"title": "Kind of dialog object",
-					"description": "Defines the valid properties for the component you are configuring (from a dialog .schema file)",
-					"type": "string",
-					"pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
-					"const": "Microsoft.Graph.Calendar.GetMeetingRooms"
-				},
-				"$designer": {
-					"title": "Designer information",
-					"type": "object",
-					"description": "Extra information for the Bot Framework Composer."
-				}
-			}
-		},
 		"Microsoft.Graph.Calendar.GetMeetings": {
 			"$role": "implements(Microsoft.IDialog)",
 			"type": "object",
@@ -4860,6 +5030,7 @@
 							"examples": [
 								"=..."
 							],
+							"$role": "expression",
 							"type": "string",
 							"title": "Expression",
 							"pattern": "^=.*\\S.*"
@@ -6235,6 +6406,9 @@
 					"$ref": "#/definitions/Microsoft.UpdateActivity"
 				},
 				{
+					"$ref": "#/definitions/Microsoft.AzureSearch.Calendar.GetMeetingRooms"
+				},
+				{
 					"$ref": "#/definitions/Microsoft.Bot.Solutions.CustomGotoAction"
 				},
 				{
@@ -6263,9 +6437,6 @@
 				},
 				{
 					"$ref": "#/definitions/Microsoft.Graph.Calendar.GetEvents"
-				},
-				{
-					"$ref": "#/definitions/Microsoft.Graph.Calendar.GetMeetingRooms"
 				},
 				{
 					"$ref": "#/definitions/Microsoft.Graph.Calendar.GetMeetings"
@@ -6305,6 +6476,9 @@
 				},
 				{
 					"$ref": "#/definitions/Microsoft.Graph.Who.GetUsers"
+				},
+				{
+					"$ref": "#/definitions/Microsoft.Bot.Solutions.CustomAuthInput"
 				},
 				{
 					"$ref": "#/definitions/Microsoft.Graph.Calendar.EventDateTimeInput"
@@ -10923,6 +11097,7 @@
 			]
 		},
 		"equalsExpression": {
+			"$role": "expression",
 			"type": "string",
 			"title": "Expression",
 			"description": "Expression starting with =.",
@@ -10932,6 +11107,7 @@
 			]
 		},
 		"expression": {
+			"$role": "expression",
 			"type": "string",
 			"title": "Expression",
 			"description": "Expression to evaluate.",

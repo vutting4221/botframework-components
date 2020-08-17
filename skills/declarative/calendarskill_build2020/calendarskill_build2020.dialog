@@ -127,7 +127,7 @@
           "assignments": [
             {
               "property": "dialog.datetime",
-              "value": "=@toDateTime"
+              "value": "=@datetime"
             },
             {
               "property": "dialog.title",
@@ -458,6 +458,29 @@
             "personNameArray": "=dialog.personNameArray",
             "ordinal": "=dialog.ordinal"
           }
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "ZMA8Uz"
+      },
+      "intent": "Cancel",
+      "actions": [
+        {
+          "$kind": "Microsoft.CancelAllDialogs",
+          "$designer": {
+            "id": "TPxhEN"
+          },
+          "activityProcessed": true
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "DJklwJ"
+          },
+          "activity": "${SendActivity_DJklwJ()}"
         }
       ]
     }

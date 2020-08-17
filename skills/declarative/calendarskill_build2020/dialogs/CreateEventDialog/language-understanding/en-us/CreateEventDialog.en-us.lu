@@ -59,3 +59,27 @@
 - y
 - n
 
+
+
+# TextInput_Response_YhjtAz
+> add some expected user responses:
+> - Please remind me to {itemTitle=buy milk}
+> - remind me to {itemTitle}
+> - add {itemTitle} to my todo list
+>
+> entity definitions:
+> @ ml itemTitle
+
+- team meeting
+- name it {title=project review}
+
+# TextInput_Response_xKJtnS
+> add some expected user responses:
+> - Please remind me to {itemTitle=buy milk}
+> - remind me to {itemTitle}
+> - add {itemTitle} to my todo list
+>
+> entity definitions:
+> @ ml itemTitle
+
+- set the title to 

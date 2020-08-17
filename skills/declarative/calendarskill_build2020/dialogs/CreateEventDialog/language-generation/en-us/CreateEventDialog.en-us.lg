@@ -11,7 +11,6 @@
 # ConfirmInput_Prompt_MwF0M9()
 [Activity
     Text = Is this correct?
-    Attachments = ${json(BuildNewMeetingDetailCard())}
 ]
 # SendActivity_Z8dBXh()
 - I've created the meeting.
@@ -20,7 +19,7 @@
 {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "type": "AdaptiveCard",
-    "version": "1.0",
+    "version": "1.2",
     "body": [
         {
             "type": "Container",
@@ -229,3 +228,8 @@
 I've added the following recipients:
 \n * ${join(dialog.attendees, " \n * ")}
 ```
+
+# SendActivity_vUydcO()
+[Activity
+    Attachments = ${json(BuildNewMeetingDetailCard())}
+]

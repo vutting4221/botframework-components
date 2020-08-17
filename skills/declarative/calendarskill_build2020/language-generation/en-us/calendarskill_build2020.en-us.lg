@@ -8,3 +8,5 @@
     - Hi, ${user.settings.displayName}! How can I help you today?
 - ELSE: 
     - Hi there! How can I help you today?
+# SendActivity_DJklwJ()
+- I've cancelled the request. What else can I help you with?

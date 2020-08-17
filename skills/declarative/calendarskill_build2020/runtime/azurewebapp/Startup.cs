@@ -22,10 +22,13 @@ using Microsoft.Bot.Builder.Integration.ApplicationInsights.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core.Skills;
 using Microsoft.Bot.Builder.Skills;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Schema;
 using Microsoft.Bot.Solutions.Extensions;
 using Microsoft.BotFramework.Composer.Core;
 using Microsoft.BotFramework.Composer.Core.Settings;
+using Microsoft.BotFramework.Composer.WebApp.Authentication;
 
 //using Microsoft.BotFramework.Composer.CustomAction;
 using Microsoft.Extensions.Configuration;
@@ -86,7 +89,8 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
 
         public BotFrameworkHttpAdapter GetBotAdapter(IStorage storage, BotSettings settings, UserState userState, ConversationState conversationState, IServiceProvider s, TelemetryInitializerMiddleware telemetryInitializerMiddleware)
         {
-            var adapter = new BotFrameworkHttpAdapter(new ConfigurationCredentialProvider(this.Configuration));
+            var authConfig = s.GetService<AuthenticationConfiguration>();
+            var adapter = new BotFrameworkHttpAdapter(new ConfigurationCredentialProvider(this.Configuration), authConfig: authConfig);
 
             adapter
               .UseStorage(storage)
@@ -103,12 +107,13 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
             {
                 await turnContext.SendActivityAsync(exception.Message).ConfigureAwait(false);
                 await turnContext.SendActivityAsync(exception.StackTrace).ConfigureAwait(false);
+                await turnContext.SendActivityAsync(new Activity(type: ActivityTypes.Trace, text: exception.StackTrace)).ConfigureAwait(false);
                 await conversationState.ClearStateAsync(turnContext).ConfigureAwait(false);
                 await conversationState.SaveChangesAsync(turnContext).ConfigureAwait(false);
             };
             return adapter;
         }
-
+          
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -125,7 +130,7 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
             services.AddSingleton<BotAdapter>(sp => (BotFrameworkHttpAdapter)sp.GetService<IBotFrameworkHttpAdapter>());
 
             // Register AuthConfiguration to enable custom claim validation.
-            services.AddSingleton<AuthenticationConfiguration>();
+            services.AddSingleton(sp => new AuthenticationConfiguration { ClaimsValidator = new AllowedCallersClaimsValidator(sp.GetService<IConfiguration>()) });
 
             // register components.
             ComponentRegistration.Add(new DialogsComponentRegistration());
@@ -135,7 +140,7 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
             ComponentRegistration.Add(new QnAMakerComponentRegistration());
             ComponentRegistration.Add(new LuisComponentRegistration());
             ComponentRegistration.Add(new MSGraphComponentRegistration());
-            
+
             // This is for custom action component registration.
             //ComponentRegistration.Add(new CustomActionComponentRegistration());
 

@@ -15,25 +15,34 @@
       },
       "actions": [
         {
-          "$kind": "Microsoft.OAuthInput",
+          "$kind": "Microsoft.Bot.Solutions.CustomAuthInput",
           "$designer": {
-            "id": "9esul3"
+            "id": "FDDZB9"
           },
           "timeout": 900000,
           "maxTurnCount": 3,
           "allowInterruptions": true,
+          "appId": "=settings.oauthCredentials.microsoftAppId",
+          "appPassword": "=settings.oauthCredentials.microsoftAppPassword",
           "connectionName": "=settings.connectionName",
-          "title": "Login",
           "text": "Please login to access your calendar.",
+          "title": "Login",
           "property": "user.token"
         },
         {
-          "$kind": "Microsoft.Graph.Calendar.GetUserSettings",
+          "$kind": "Microsoft.SetProperty",
           "$designer": {
-            "id": "nCow5V"
+            "id": "sttkVg"
           },
-          "token": "=user.token.token",
-          "resultProperty": "user.settings"
+          "property": "user.settings.mailboxSettings.TimeZone",
+          "value": "=\"Pacific Standard Time\""
+        },
+        {
+          "$kind": "Microsoft.TraceActivity",
+          "$designer": {
+            "id": "XH1Nzw"
+          },
+          "name": "User Settings Trace"
         }
       ]
     }

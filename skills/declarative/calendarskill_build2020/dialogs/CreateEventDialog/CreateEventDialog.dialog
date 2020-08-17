@@ -71,7 +71,8 @@
           "alwaysPrompt": false,
           "prompt": "${TextInput_Prompt_YhjtAz()}",
           "property": "dialog.title",
-          "allowInterruptions": false
+          "value": "=@title",
+          "allowInterruptions": true
         },
         {
           "$kind": "Microsoft.BeginDialog",
@@ -126,6 +127,13 @@
           "allowInterruptions": false,
           "prompt": "${TextInput_Prompt_og2ZOc()}",
           "property": "dialog.description"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "vUydcO"
+          },
+          "activity": "${SendActivity_vUydcO()}"
         },
         {
           "$kind": "Microsoft.ConfirmInput",

@@ -77,3 +77,19 @@
 @ prebuilt email
 @ prebuilt ordinalV2
 @ prebuilt personName
+
+# Cancel
+> add some example phrases to trigger this intent:
+> - please tell me the weather
+> - what is the weather like in {city=Seattle}
+
+> entity definitions:
+> @ ml city
+
+- stop
+- cancel
+- restart
+- undo
+- cancel this please
+- cancel the request
+- please cancel
