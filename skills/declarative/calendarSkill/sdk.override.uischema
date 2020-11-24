@@ -1,0 +1,59 @@
+{
+    "Microsoft.SendActivity": {
+        "flow": {
+            "widget": "ActionCard",
+            "header": {
+                "widget": "ActionHeader",
+                "icon": "ChatBot",
+                "color": {}
+            },
+            "body": "=action.activity",
+            "footer": {
+                "widget": "LgWidget",
+                "field": "activity"
+            }
+        }
+    },
+    "Microsoft.Bot.Solutions.GotToAction": {
+        "menu":{
+            "submenu": ["Solutions"],
+            "label": "Got To Action"
+        }
+    },
+    "Microsoft.Graph.Calendar.AcceptEvent": {
+        "menu":{
+            "submenu": ["Microsoft Graph", "Calendar"],
+            "label": "Accept Event"
+
+        },
+        "flow": {
+            
+            "widget": "ActionCard",
+            "header": {
+                "widget": "ActionHeader",
+                "icon": "ChatBot",
+                "color": {},
+                "title": "accept"
+            },
+            "body": "=action.eventId"
+        }
+    },
+    "Microsoft.Graph.Calendar.CreateEvent": {
+        "menu":{
+            "submenu": ["Microsoft Graph", "Calendar"],
+            "label": "Create Event"
+        }
+    },
+    "Microsoft.Graph.User.GetProfile": {
+        "menu":{
+            "submenu": ["Microsoft Graph", "User"],
+            "label": "Get Profile"
+        }
+    },
+    "Microsoft.Bot.SendActivityPlus": {
+        "menu":{
+            "submenu": [],
+            "label": "Send Activity Plus"
+        }
+    }
+}
