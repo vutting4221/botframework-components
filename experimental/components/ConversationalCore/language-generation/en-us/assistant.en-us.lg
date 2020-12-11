@@ -9,7 +9,7 @@
 - Hey there${UserName()}.
 
 # NewUserGreeting()
-- ${Greeting()} I'm your virtual assistant. I'm here to help you get things done.
+- ${Greeting()} I'm your virtual assistant ROBOT MACHINE. I'm here to help you get things done.
 
 # ReturningUserGreeting()
 - ${Greeting()} ${HowCanIHelp()}

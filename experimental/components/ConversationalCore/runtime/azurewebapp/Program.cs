@@ -42,7 +42,15 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
                 var configFile = Path.GetFullPath(Path.Combine(botRoot, @"settings/appsettings.json"));
 
                 builder.AddJsonFile(configFile, optional: true, reloadOnChange: true);
-
+                
+                // Orchestrator setting registration
+                var orchestratorSettingsPath = Path.GetFullPath(Path.Combine(botRoot, "generated", "orchestrator.settings.json"));
+                var orchestratorSettingsFile = new FileInfo(orchestratorSettingsPath);
+                if (orchestratorSettingsFile.Exists)
+                {
+                    builder.AddJsonFile(orchestratorSettingsFile.FullName, optional: false, reloadOnChange: true);
+                }
+                
                 // Need to put this part here to override the any customized settings
                 if (!env.IsDevelopment())
                 {
