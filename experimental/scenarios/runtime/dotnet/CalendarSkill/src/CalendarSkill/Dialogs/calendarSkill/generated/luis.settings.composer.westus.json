@@ -1,0 +1,32 @@
+{
+    "luis": {
+        "calendarskill_en_us_lu": {
+            "appId": "dca1e3b1-b267-485f-92ef-7db9bc591026",
+            "version": "0.1"
+        },
+        "GetContactDialog_en_us_lu": {
+            "appId": "63d9f37c-b65b-4e1d-9328-718dc577fda2",
+            "version": "3.8"
+        },
+        "CreateEventDialog_en_us_lu": {
+            "appId": "b3d81dfe-e39a-4a23-aac0-b8906e3e50f0",
+            "version": "3.8"
+        },
+        "SearchEventsDialog_en_us_lu": {
+            "appId": "8821f745-e0ba-4bab-9cd0-98def354dd0a",
+            "version": "0.2"
+        },
+        "ListDialog_en_us_lu": {
+            "appId": "c2971907-375e-4616-8446-268791225348",
+            "version": "3.8"
+        },
+        "UpdateEventDialog_en_us_lu": {
+            "appId": "47975a71-350f-48ff-b8e3-a73ecff4da77",
+            "version": "3.8"
+        },
+        "UpdateSlots_en_us_lu": {
+            "appId": "18390267-8761-4d1a-a39d-3150319f3b7c",
+            "version": "6.1"
+        }
+    }
+}

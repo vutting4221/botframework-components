@@ -1,0 +1,115 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 3.2.0
+
+
+> # Intent definitions
+
+# Next
+- next
+- next page
+- show more
+- more please
+- show me more options
+
+
+# Previous
+- previous
+- previous page
+- last page
+- show the last page
+- show the earlier options
+
+
+# Skip
+- skip
+- skip this
+- skip over this
+- don't do this
+- no thanks
+- choose my own date and time
+- provide my own
+- choose something different
+- cancel
+- cancel this
+- never mind
+
+
+# ChoiceInput_Response_dc3QNs
+- 1
+- 2
+- 3
+- the first one
+- the second one
+- the last one
+
+
+# _Interruption
+- tell me what is going on
+- tell me how long i can rest for
+- who am i meeting for dinner
+- what do i have tomorrow
+- what's happening first
+- change the sync with mary to start at 12
+- decline my next meeting
+- how long until my next meeting
+- where will the next event take place
+- what's on my calendar today?
+- accept the meeting with john
+- tell me when my next break is
+- who else will be in banking meeting
+- i need a break, when can i?
+- what do i have this week
+- let me know when i have a break
+- what's on monday
+- where am i going for team meeting?
+- decline that event
+- my day today
+- decline the event titled review our scope
+- when am i free this week
+- how long is my last meeting?
+- am i free at 4:30 pm
+- what meetings do i have today
+- cancel this meeting for me
+- cancel this event
+- tell me when my day ends
+- cancel my next meeting
+- find meetings with tom
+- how long until another meeting starts
+- tell me what my first meeting is
+- how many minutes do i have until another meeting starts
+- find meetings with susan tomorrow
+- can you tell me what conference room my next meeting is in?
+- who else is going to the 2pm meeting tomorrow
+- when do i have a break?
+- update the sync on planning for release to start at 9
+- where is the meeting with anna
+- what time does my next meeting start
+- whats upcoming
+- tell me what time my meetings start
+- i just woke up, what can i expect
+- my calendar for tomorrow
+- Reschedule my meeting with Ashley to start at 2 PM
+- accept that event tentatively for now
+- anything named standup this week?
+- when am i done today?
+- move this event to tomorrow
+- tentatively accept the 1:1 with susan
+
+
+> # Entity definitions
+
+
+> # PREBUILT Entity definitions
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

@@ -1,0 +1,70 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 3.2.0
+
+
+> # Intent definitions
+
+# Cancel
+- cancel
+- cancel this
+- stop
+- stop this
+- exit
+
+
+# ConfirmYes
+- yes
+- confirm
+- sure
+
+
+# _Interruption
+- where is the meeting with anna
+- when am i free this week
+- when does my day finally end
+- anything named standup this week?
+- show what is going on
+- what time does my next meeting start
+- what time is the sync planned for
+- who is included in the invite in the next meeting
+- how does my day start
+- who else is in my 2pm meeting?
+- when will i chat to lauren
+- the meeting with anna i want it to be tentative
+- just make me tentative
+- when do i meet with charles
+- when will we meet with the design team today
+- can i take a break today?
+- create new
+- book some time tomorrow
+- when do i have a break?
+- tell me how long i can rest for
+- i will not attend
+- do i have anything about the project review today
+- show what is on my calendar today
+- do i have time to breathe today?
+- decline the one with mary
+- what do i have planned for tomorrow?
+- tell me when my day ends
+- decline the meeting at 9
+- i want to create a meeting with elaine at 9
+- what's on today
+
+
+> # Entity definitions
+
+
+> # PREBUILT Entity definitions
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

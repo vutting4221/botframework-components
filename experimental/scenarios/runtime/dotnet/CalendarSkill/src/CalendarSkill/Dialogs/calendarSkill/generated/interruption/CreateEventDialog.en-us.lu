@@ -1,0 +1,126 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 7.0.0
+
+
+> # Intent definitions
+
+# SkipSlot
+- skip
+- skip that
+- nothing
+- none
+
+
+# TextInput_Response_8FlYLk
+- It's a 1:1 with Mary
+- Planning for end of year
+- Call it editorial meeting
+- Please title it content review
+- How about team check-in
+- Title it Happy Hour
+
+
+# ChooseOwnDateTime
+- Choose own date and time
+- Choose my own date and time
+
+
+# ChangeSlots
+- Can you {@EntityOperation={@Add=add}} Rachel
+- Please {@EntityOperation={@Add=include}} a {@EntityName={@TeamsLink=Teams link}}
+- Please {@EntityOperation={@Remove=remove}} the {@EntityName={@TeamsLink=Teams link}}
+- {@EntityOperation={@Change=Reschedule}} my meeting with Ashley to start at 2 PM
+- Update my {@EntityName={@EventLocation=location}} to Café Paris
+- Can you {@EntityOperation={@Change=change}} the {@EntityName={@EventTitle=name}} of my upcoming event to Brainstorm
+- I would like the meeting with Sarah to {@EntityName={@EventDuration=last}} for 1 hour
+- change {@EntityName={@EventDuration=duration}}
+- change {@EntityName={@EventTitle=title}}
+- change event
+- {@EntityOperation={@Add=add}} megan
+- {@EntityOperation={@Add=add}} {@EntityName={@EventAttendee=attendee}}
+- change {@EntityName={@EventDateTime=time}}
+- change {@EntityName={@EventLocation=location}}
+- move my lunch meeting tomorrow to 12:30 pm
+
+
+# Cancel
+- cancel
+- cancel this
+- stop
+- stop this
+- exit
+
+
+# ConfirmYes
+- yes
+- confirm
+- sure
+
+
+# None
+- tomorrow at 9 am
+- at 3
+- today
+
+
+# _Interruption
+- tell me about my meetings on friday
+- where will the next event take place
+- when can i quit work and go home
+- what do i have wednesday
+- when is it time for me to stop working
+- tell me when my day ends
+- anything named standup this week?
+- tell me when i'll be done with meetings today
+- change the sync with mary to start at 12
+- when can i take a break?
+- what is first on my agenda?
+- what's happening first
+- how long until i'm up again
+- make the meeting at 9 tentative
+- update my meeting with elaine
+- my events for today
+- what's on for today
+- who else is joining the event at 1 pm
+- who all is attending the 4pm meeting?
+- what is my first meeting tomorrow?
+
+
+> # Entity definitions
+
+@ ml EntityName
+    - @ ml EventTitle
+    - @ ml EventDateTime
+    - @ ml EventAttendee
+    - @ ml EventLocation
+    - @ ml EventDuration
+    - @ ml TeamsLink
+
+
+@ ml EntityOperation
+    - @ ml Add
+    - @ ml Remove
+    - @ ml Change
+
+
+
+> # PREBUILT Entity definitions
+
+@ prebuilt datetimeV2
+
+@ prebuilt personName
+
+@ prebuilt email
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

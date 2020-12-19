@@ -1,0 +1,85 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 3.2.0
+
+
+> # Intent definitions
+
+# NoAttendees
+- none
+- no attendees
+- None work for me
+- Nobody
+- No it's just me
+- just me
+- myself
+- alone
+- Only me
+- No one
+- Proceed without attendees
+
+
+# TextInput_Response_wIEu2k
+- megan
+- tom
+- pam
+- invite john
+- add ted
+
+
+# TryAgain
+- try again
+- I want to try again
+
+
+# Cancel
+- cancel
+- cancel this
+- stop
+- stop this
+- exit
+
+
+# _Interruption
+- can you move the event with elaine to start at 12 instead of 11
+- when can i quit work and go home
+- what time am i meeting with emma?
+- what meetings do i have with sally on monday
+- add attendee
+- when am i meeting henry
+- what meetings do i have this weekend?
+- what is my first meeting tomorrow?
+- accept that event tentatively for now
+- what do i have this week
+- what does my day look like
+- let me know when i have a break
+- who else is included during the sync on progress
+- make the 1:1 meeting with susan tentative
+- i want to accept this meeting
+- show what is on my calendar today
+- when am i finished for today?
+- who is attending the meeting
+- accept the meeting with john
+- do i have anything with steve on friday about composer features?
+
+
+> # Entity definitions
+
+
+> # PREBUILT Entity definitions
+
+@ prebuilt personName
+
+@ prebuilt email
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

@@ -1,0 +1,175 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 3.2.0
+
+
+> # Intent definitions
+
+# TextInput_Response_a8RIpz
+- find a meeting about {@Title=group meeting}
+- find a meeting about {@Title=plan}
+- find a meeting at 7pm from melissa
+- find a meeting from darren about {@Title=status update}
+- find a meeting from deborah about {@Title=team session}
+- find a meeting from donna
+- find a meeting Title {@Title=daily meeting}
+- find a meeting with Title {@Title=weekly report}
+- find a meeting with title {@Title=second lesson} from amanda
+- find a meeting with title {@Title=sharing} from steven
+- 10 am
+- discussion meeting
+- today
+- tomorrow
+
+
+# No
+- no
+- skip
+- skip it
+- nope
+- ignore it
+- no i don't want that
+- no later
+- no leave it
+- no more no
+- no no
+- no no no
+- no no thank you
+- no not that one
+- no reject it
+- no thank you
+- no thanks
+- no way
+- no wrong
+- not
+- not at all
+- not even close
+- not exactly
+- not now
+- not quite
+- not right now
+- not that
+- oh no
+- cancel
+- stop
+- stop it
+
+
+# _Interruption
+- add a lunch meeting with jim on wednesday at noon
+- add a meeting to my calendar
+- add a meeting to my calendar with anna
+- add an event called brthday party
+- book a meeting with megan at 10 am about sync meeting
+- book some time tomorrow
+- create a 1:1 meeting with elaine and lauren
+- create a brainstorm with lauren and elaine at 9
+- create a event
+- create a meeting
+- create an event at 9pm
+- create new
+- i want to create a meeting with elaine at 9
+- i want to create a new event
+- new event
+- new event with teams link
+- new meeting
+- new meeting at 9
+- schedule a meeting with stephanie tomorrow afternoon
+- schedule an event dentist appointment on friday at 2
+- set a private event for 4pm
+- set up a meeting called sync with lauren
+- set up a new invite
+- set up focus time at 9 am
+- set up meeting about the 2020 sales report at 9am on thursday
+- set up time for myself
+- set-up an event
+- calendar overview
+- give me an overview of my calendar
+- how does my day look so far
+- just tell me my calendar today
+- list all events for august 20th
+- my appointments of the day
+- my calendar for tomorrow
+- my day today
+- my events for today
+- overview of thursday
+- overview of today
+- read me my calendar
+- show my calendar
+- show schedule
+- show what is going on
+- show what is on my calendar today
+- tell me about my meetings on friday
+- tell me about today
+- tell me what is going on
+- tell me what my next month is like
+- what appointments do i have
+- what do i have planned for tomorrow?
+- what do i have this week
+- what do i have tomorrow
+- what do i have wednesday
+- what does my day look like
+- what is going on next week
+- what is going on today
+- what is my agenda for this weekend?
+- what is on for today?
+- what is on my calendar
+- what is on my calendar tomorrow
+- what is up next month?
+- what meetings do i have on thursday?
+- what meetings do i have this weekend?
+- what meetings do i have today
+- what meetings do i need to attend today?
+- what's on for today
+- what's on monday
+- what's on my calendar
+- what's on my calendar today?
+- whats on next
+- what's on today
+- whats upcoming
+- can you add rachel
+- can you change the name of my upcoming event to brainstorm
+- can you move the event with elaine to start at 12 instead of 11
+- change my meeting tomorrow morning
+- change the sync with mary to start at 12
+- edit my event tomorrow afternoon with thomas
+- i would like the meeting with sarah to last for 1 hour
+- move this event to 9
+- move this event to tomorrow
+- move this to start tomorrow at 4
+- please include a teams link
+- please remove the teams link
+- reschedule my meeting with ashley to start at 2 pm
+- update it
+- update meeting
+- update my location to café paris
+- update my meeting with elaine
+- update the event with patrick and include lauren to the invite
+- update the meeting with anna
+- update the sync on planning for release to start at 9
+
+
+> # Entity definitions
+
+@ ml Title
+
+
+> # PREBUILT Entity definitions
+
+@ prebuilt datetimeV2
+
+@ prebuilt personName
+
+@ prebuilt ordinalV2
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+
